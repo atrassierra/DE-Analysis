@@ -24,6 +24,7 @@ genes <- unlist(sapply(strsplit(genesiso, ","), "[", 1))
 isoformas <- unlist(sapply(strsplit(genesiso, ","), "[", 2))
 
 data.matriz <- data.matrix(data)
+rownames(data.matriz) <- isoformas
 data.size <- MedianNorm(data.matriz) # Isoform-level library size factors
 
 # En el siguiente paso tenemos que elegir en cuantos grupos queremos que nos separe los genes dependiendo del número
@@ -42,3 +43,5 @@ IsoEBOut <- EBTest(Data = data.matriz, NgVector = IsoNgTrun, Conditions = condic
 
 deiso <- GetDEResults(IsoEBOut, FDR = .05)              
 deiso
+IsoFC <- PostFC(IsoEBOut)
+IsoFC$PostFC
